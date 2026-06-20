@@ -31,6 +31,7 @@ export function ShopTheRange({ products }: ShopTheRangeProps) {
             {products.map((p, i) => (
               <ProductCard
                 key={p.id}
+                productId={p.id}
                 name={p.name}
                 slug={p.slug}
                 tastingNote={p.tastingNote}

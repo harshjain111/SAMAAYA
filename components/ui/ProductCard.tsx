@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 import { buttonClasses } from "./Button";
 import { StrengthMeter } from "./StrengthMeter";
+import { useCart } from "@/lib/cart/store";
 
 export interface CardVariant {
   id?: string;
@@ -15,13 +16,15 @@ export interface CardVariant {
 }
 
 export interface ProductCardProps {
+  /** products.id — needed to build a cart line. */
+  productId?: string;
   name: string;
   slug: string;
   tastingNote?: string | null;
   strength?: number | null;
   image?: { url: string; alt?: string | null } | null;
   variants: CardVariant[];
-  /** Inline add-to-cart (wired in Prompt 2.1). Optional → button still renders. */
+  /** Override the default add-to-cart behaviour (else uses the cart store). */
   onAddToCart?: (variant: CardVariant) => void;
   className?: string;
   priority?: boolean;
@@ -34,6 +37,7 @@ const inr = (n: number) => `₹${Math.round(n).toLocaleString("en-IN")}`;
  * size selector with LIVE price update, and inline Add to Cart. Mobile-first.
  */
 export function ProductCard({
+  productId,
   name,
   slug,
   tastingNote,
@@ -44,6 +48,7 @@ export function ProductCard({
   className,
   priority = false,
 }: ProductCardProps) {
+  const addItem = useCart((s) => s.addItem);
   const sorted = [...variants].sort((a, b) => a.price - b.price);
   const minPrice = sorted.length ? sorted[0].price : 0;
   const [selected, setSelected] = useState<CardVariant | undefined>(sorted[0]);
@@ -51,6 +56,24 @@ export function ProductCard({
   const price = selected?.price ?? minPrice;
   const mrp = selected?.mrp ?? null;
   const isEntry = selected?.label === sorted[0]?.label;
+
+  function handleAdd() {
+    if (!selected) return;
+    if (onAddToCart) {
+      onAddToCart(selected);
+      return;
+    }
+    addItem({
+      variantId: selected.id ?? `${slug}:${selected.label}`,
+      productId: productId ?? "",
+      slug,
+      name,
+      weightLabel: selected.label,
+      price: selected.price,
+      mrp: selected.mrp,
+      image: image?.url ?? null,
+    });
+  }
 
   return (
     <div
@@ -141,7 +164,7 @@ export function ProductCard({
         {/* Inline Add to Cart */}
         <button
           type="button"
-          onClick={() => selected && onAddToCart?.(selected)}
+          onClick={handleAdd}
           className={cn(buttonClasses("primary", "sm"), "mt-4 w-full")}
         >
           Add to Cart
