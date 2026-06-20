@@ -352,8 +352,8 @@ with p as (
 insert into public.product_variants (product_id, weight_grams, label, price, mrp, sku, stock_qty, sort_order)
 select id, w.grams, w.label, w.price, w.mrp, w.sku, w.stock, w.sort
 from p cross join (values
-  (250, '250g', 349, NULL, 'GGC-250', 90, 1),
-  (500, '500g', 649, NULL, 'GGC-500', 60, 2)
+  (250, '250g', 349, NULL::numeric, 'GGC-250', 90, 1),
+  (500, '500g', 649, NULL::numeric, 'GGC-500', 60, 2)
 ) as w(grams, label, price, mrp, sku, stock, sort);
 
 insert into public.product_images (product_id, url, alt, sort_order)
