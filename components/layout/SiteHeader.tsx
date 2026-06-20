@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { buttonClasses } from "@/components/ui";
 import { CartButton } from "@/components/cart/CartButton";
+import { AnnouncementBar } from "./AnnouncementBar";
 
 export interface SiteHeaderProps {
   announcement?: string | null;
@@ -20,11 +21,7 @@ const NAV = [
 export function SiteHeader({ announcement }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-40">
-      {announcement && (
-        <div className="bg-green-deep px-4 py-2 text-center text-xs font-medium text-cream">
-          {announcement}
-        </div>
-      )}
+      {announcement && <AnnouncementBar text={announcement} />}
       <div className="border-b border-charcoal/10 bg-cream/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <Link
