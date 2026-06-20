@@ -1,22 +1,46 @@
-import Link from "next/link";
+import { getActiveProducts } from "@/lib/data/products";
+import { getStoreSettings } from "@/lib/data/settings";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { Hero } from "@/components/home/Hero";
+import { TrustStrip } from "@/components/home/TrustStrip";
+import { FreshDifference } from "@/components/home/FreshDifference";
+import { ShopTheRange } from "@/components/home/ShopTheRange";
+import { FindYourMoment } from "@/components/home/FindYourMoment";
+import { EstateToCup } from "@/components/home/EstateToCup";
+import { SamaayaStory } from "@/components/home/SamaayaStory";
+import { SocialProofBulkContact } from "@/components/home/SocialProofBulkContact";
 
-export default function Home() {
+// Re-fetch periodically so admin catalog/setting changes surface without redeploy.
+export const revalidate = 60;
+
+export default async function Home() {
+  const [products, settings] = await Promise.all([
+    getActiveProducts(),
+    getStoreSettings(),
+  ]);
+
+  const priceFrom = products.length
+    ? Math.min(...products.map((p) => p.priceFrom))
+    : undefined;
+
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 text-center">
-      <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-green-leaf">
-        Fresh from Assam&apos;s finest estates
-      </p>
-      <h1 className="text-4xl sm:text-5xl">Some moments deserve a better cup.</h1>
-      <p className="mt-6 max-w-md text-charcoal/80">
-        SAMAAYA — <span className="italic">The Right Moment.</span> The
-        storefront is being built. The design system is ready to verify.
-      </p>
-      <Link
-        href="/styleguide"
-        className="mt-8 inline-flex items-center rounded-full bg-amber px-6 py-3 font-semibold text-white transition-colors hover:bg-amber-light"
-      >
-        View the styleguide →
-      </Link>
-    </main>
+    <>
+      <SiteHeader announcement={settings.announcement_bar} />
+      <main>
+        <Hero priceFrom={priceFrom} />
+        <TrustStrip />
+        <FreshDifference />
+        <ShopTheRange products={products} />
+        <FindYourMoment />
+        <EstateToCup />
+        <SamaayaStory />
+        <SocialProofBulkContact
+          whatsappNumber={settings.whatsapp_number}
+          contactEmail={settings.contact_email}
+        />
+      </main>
+      <SiteFooter storeName={settings.store_name} />
+    </>
   );
 }
