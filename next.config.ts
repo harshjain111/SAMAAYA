@@ -5,9 +5,13 @@ const nextConfig: NextConfig = {
   // directory doesn't confuse Next's file tracing.
   outputFileTracingRoot: __dirname,
   images: {
-    // Supabase Storage CDN will be added here once the project is provisioned.
-    // remotePatterns: [{ protocol: "https", hostname: "<project>.supabase.co" }],
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      // Supabase Storage CDN (product images uploaded via admin).
+      { protocol: "https", hostname: "*.supabase.co" },
+      // Unsplash — used by seed/sample product images during development.
+      { protocol: "https", hostname: "images.unsplash.com" },
+    ],
   },
 };
 
