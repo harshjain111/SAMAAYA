@@ -10,6 +10,13 @@ export async function getServerUser(): Promise<User | null> {
   return user;
 }
 
+/** Throw unless the caller is an admin — guard for server actions/mutations. */
+export async function requireAdmin(): Promise<void> {
+  if (!(await isAdmin())) {
+    throw new Error("Not authorized.");
+  }
+}
+
 /** Whether the current user is an admin (gates /admin/*). */
 export async function isAdmin(): Promise<boolean> {
   const supabase = await createClient();

@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "check:db": "node --env-file=.env.local scripts/check-supabase.mjs"
+    "check:db": "node --env-file=.env.local scripts/check-supabase.mjs",
+    "check:admin": "node --env-file=.env.local scripts/check-admin-data.mjs",
+    "make:admin": "node --env-file=.env.local scripts/make-admin.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",
