@@ -227,21 +227,21 @@ export default function Styleguide() {
         <div className="grid gap-6 sm:grid-cols-3">
           <MomentCard
             moment="morning"
-            icon="☀️"
+            icon="sun"
             title="Morning Energy"
             tagline="Wake up to something bold."
             description="The first cup of the day should mean it. Strong, brisk, and bright."
           />
           <MomentCard
             moment="afternoon"
-            icon="🌤️"
+            icon="cloud"
             title="Afternoon Calm"
             tagline="A pause that's actually yours."
             description="A smooth, balanced cup to slow the noise for a minute."
           />
           <MomentCard
             moment="evening"
-            icon="🌙"
+            icon="moon"
             title="Evening Comfort"
             tagline="Wind down, gently."
             description="Lighter, softer, easy. The cup that tells your day it's okay to end."

@@ -11,7 +11,7 @@ export function FindYourMoment() {
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
           <MomentCard
             moment="morning"
-            icon="☀️"
+            icon="sun"
             title="Morning Energy"
             tagline="Wake up to something bold."
             description="The first cup of the day should mean it. Strong, brisk, and bright enough to start anything."
@@ -19,7 +19,7 @@ export function FindYourMoment() {
           />
           <MomentCard
             moment="afternoon"
-            icon="🌤️"
+            icon="cloud"
             title="Afternoon Calm"
             tagline="A pause that's actually yours."
             description="The middle of the day needs a breath. A smooth, balanced cup to slow the noise for a minute."
@@ -27,7 +27,7 @@ export function FindYourMoment() {
           />
           <MomentCard
             moment="evening"
-            icon="🌙"
+            icon="moon"
             title="Evening Comfort"
             tagline="Wind down, gently."
             description="Lighter, softer, easy. The kind of cup that tells your day it's okay to end."

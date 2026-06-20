@@ -80,7 +80,7 @@ export default async function AdminDashboard() {
             <p className="text-xs text-charcoal/50">At or below {LOW_STOCK_THRESHOLD} units</p>
           </div>
           {d.lowStock.length === 0 ? (
-            <p className="px-5 py-8 text-center text-sm text-charcoal/50">All stocked up. 🌱</p>
+            <p className="px-5 py-8 text-center text-sm text-charcoal/50">All stocked up.</p>
           ) : (
             <ul className="divide-y divide-charcoal/5">
               {d.lowStock.map((v) => (

@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { Icon, type IconName } from "./Icon";
 import type { Moment } from "@/types/database";
 
 export interface MomentCardProps {
   moment: Moment;
-  icon: React.ReactNode;
+  icon: IconName;
   title: string;
   tagline: string;
   description: string;
@@ -12,10 +13,7 @@ export interface MomentCardProps {
   className?: string;
 }
 
-/**
- * Moment card — the emotional "find your moment" layer (PRD §5.1 §5).
- * Links to the moment-filtered shop. The whole card is clickable.
- */
+/** Moment card — the emotional "find your moment" layer (PRD §5.1 §5). */
 export function MomentCard({
   moment,
   icon,
@@ -29,19 +27,21 @@ export function MomentCard({
     <Link
       href={`/shop?moment=${moment}`}
       className={cn(
-        "group flex flex-col rounded-2xl border border-charcoal/10 bg-white p-6",
-        "transition-shadow hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber",
+        "group flex flex-col card card-hover p-6",
         className,
       )}
     >
-      <span className="text-3xl" aria-hidden="true">
-        {icon}
+      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-green-soft/15 text-green-deep transition-colors group-hover:bg-green-deep group-hover:text-cream">
+        <Icon name={icon} size={22} />
       </span>
-      <h3 className="mt-3 text-xl">{title}</h3>
+      <h3 className="mt-4 font-display text-xl">{title}</h3>
       <p className="mt-1 text-sm font-medium italic text-green-leaf">{tagline}</p>
-      <p className="mt-3 flex-1 text-sm text-charcoal/70">{description}</p>
-      <span className="mt-4 text-sm font-semibold text-amber group-hover:text-amber-light">
-        {ctaLabel} →
+      <p className="mt-3 flex-1 text-sm leading-relaxed text-charcoal/65">
+        {description}
+      </p>
+      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-amber transition-colors group-hover:text-amber-light">
+        {ctaLabel}
+        <Icon name="arrow-right" size={16} className="transition-transform group-hover:translate-x-0.5" />
       </span>
     </Link>
   );

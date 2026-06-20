@@ -1,5 +1,7 @@
 export { Button, buttonClasses } from "./Button";
 export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
+export { Icon } from "./Icon";
+export type { IconName, IconProps } from "./Icon";
 export { StrengthMeter } from "./StrengthMeter";
 export type { StrengthMeterProps } from "./StrengthMeter";
 export { ProductCard } from "./ProductCard";

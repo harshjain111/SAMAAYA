@@ -33,7 +33,7 @@ export default async function OrderPage({
       <main className="mx-auto max-w-5xl px-6 py-12">
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl">
-            {paid ? "That's the right moment, ordered. ✅" : "Order received"}
+            {paid ? "That's the right moment, ordered." : "Order received"}
           </h1>
           <p className="mt-3 text-charcoal/70">
             {paid ? (

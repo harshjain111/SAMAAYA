@@ -78,14 +78,13 @@ export function ProductCard({
   return (
     <div
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl border border-charcoal/10 bg-white",
-        "transition-shadow hover:shadow-lg",
+        "group flex flex-col overflow-hidden card card-hover",
         className,
       )}
     >
       <Link
         href={`/product/${slug}`}
-        className="relative block aspect-square overflow-hidden bg-cream"
+        className="relative block aspect-[4/5] overflow-hidden bg-cream"
       >
         {image?.url ? (
           <Image
@@ -93,7 +92,7 @@ export function ProductCard({
             alt={image.alt || name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
             priority={priority}
           />
         ) : (
@@ -101,14 +100,21 @@ export function ProductCard({
             <span className="text-sm">No image</span>
           </div>
         )}
+        {mrp && mrp > price && (
+          <span className="absolute left-3 top-3 rounded-full bg-amber px-2.5 py-0.5 text-xs font-semibold text-white shadow-soft">
+            Save {inr(mrp - price)}
+          </span>
+        )}
       </Link>
 
       <div className="flex flex-1 flex-col p-4">
         <Link href={`/product/${slug}`} className="block">
-          <h3 className="text-lg leading-snug">{name}</h3>
+          <h3 className="font-display text-lg leading-snug transition-colors group-hover:text-green-mid">
+            {name}
+          </h3>
         </Link>
         {tastingNote && (
-          <p className="mt-1 line-clamp-2 text-sm text-charcoal/60">
+          <p className="mt-1 line-clamp-2 text-sm text-charcoal/55">
             {tastingNote}
           </p>
         )}
@@ -120,7 +126,7 @@ export function ProductCard({
         {/* Price */}
         <div className="mt-3 flex items-baseline gap-2">
           {isEntry && sorted.length > 1 && (
-            <span className="text-xs text-charcoal/50">From</span>
+            <span className="text-xs uppercase tracking-wide text-charcoal/45">From</span>
           )}
           <span className="text-xl font-semibold text-green-deep">
             {inr(price)}
@@ -135,7 +141,7 @@ export function ProductCard({
         {/* Size selector — live price update */}
         {sorted.length > 1 && (
           <div
-            className="mt-3 flex flex-wrap gap-1.5"
+            className="mt-3 inline-flex flex-wrap gap-1 rounded-lg bg-cream p-1"
             role="group"
             aria-label="Select size"
           >
@@ -148,10 +154,10 @@ export function ProductCard({
                   onClick={() => setSelected(v)}
                   aria-pressed={active}
                   className={cn(
-                    "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                    "rounded-md px-3 py-1 text-xs font-medium transition-all",
                     active
-                      ? "border-green-deep bg-green-deep text-white"
-                      : "border-charcoal/20 text-charcoal/70 hover:border-green-deep",
+                      ? "bg-white text-green-deep shadow-soft"
+                      : "text-charcoal/60 hover:text-green-deep",
                   )}
                 >
                   {v.label}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/cn";
-import { buttonClasses } from "@/components/ui";
+import { buttonClasses, Icon } from "@/components/ui";
 import { useCart } from "@/lib/cart/store";
 import type { ProductDetail } from "@/lib/data/products";
 
@@ -125,7 +125,8 @@ export function ProductBuyBox({ product }: ProductBuyBoxProps) {
 
       {/* Fresh-packed reassurance */}
       <p className="mt-4 flex items-center gap-2 text-sm text-green-leaf">
-        🌱 Packed fresh · never warehoused
+        <Icon name="leaf" size={16} />
+        Packed fresh · never warehoused
       </p>
 
       {/* Sticky mobile bar */}

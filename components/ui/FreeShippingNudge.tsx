@@ -32,7 +32,7 @@ export function FreeShippingNudge({
       <p className="text-sm text-charcoal/80">
         {unlocked ? (
           <span className="font-semibold text-green-deep">
-            You&apos;ve unlocked free shipping 🎉
+            You&apos;ve unlocked free shipping.
           </span>
         ) : (
           <>
@@ -40,7 +40,7 @@ export function FreeShippingNudge({
             <span className="font-semibold text-green-deep">
               {inr(remaining)}
             </span>{" "}
-            away from free shipping 🎉
+            away from free shipping.
           </>
         )}
       </p>
