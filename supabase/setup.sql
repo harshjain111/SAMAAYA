@@ -29,6 +29,8 @@ drop table if exists
 
 drop function if exists public.is_admin() cascade;
 drop function if exists public.set_updated_at() cascade;
+drop function if exists public.next_order_number() cascade;
+drop sequence if exists public.order_number_seq cascade;
 
 create extension if not exists "pgcrypto";
 
@@ -51,6 +53,14 @@ create table public.admin_users (
 create or replace function public.is_admin()
 returns boolean language sql security definer set search_path = public stable as $$
   select exists (select 1 from public.admin_users where user_id = auth.uid());
+$$;
+
+-- Sequential order numbers: SMY-YYYY-0001
+create sequence if not exists public.order_number_seq;
+create or replace function public.next_order_number()
+returns text language sql volatile as $$
+  select 'SMY-' || to_char(now(), 'YYYY') || '-' ||
+         lpad(nextval('public.order_number_seq')::text, 4, '0');
 $$;
 
 -- ---------------------------------------------------------------------------

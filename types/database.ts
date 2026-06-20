@@ -381,6 +381,10 @@ export interface Database {
         Args: Record<string, never>;
         Returns: boolean;
       };
+      next_order_number: {
+        Args: Record<string, never>;
+        Returns: string;
+      };
     };
     Enums: Record<string, never>;
     CompositeTypes: Record<string, never>;
