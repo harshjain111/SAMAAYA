@@ -5,6 +5,7 @@ import { getStoreSettings } from "@/lib/data/settings";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton";
+import { EmailPasswordForm } from "@/components/auth/EmailPasswordForm";
 import { SignOutButton } from "@/components/auth/SignOutButton";
 
 export const metadata: Metadata = {
@@ -12,11 +13,17 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-export default async function AccountPage() {
-  const [user, settings] = await Promise.all([
+export default async function AccountPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string }>;
+}) {
+  const [{ next }, user, settings] = await Promise.all([
+    searchParams,
     getServerUser(),
     getStoreSettings(),
   ]);
+  const dest = next && next.startsWith("/") ? next : "/account";
 
   return (
     <>
@@ -46,7 +53,14 @@ export default async function AccountPage() {
               Sign in to see your order history. You never need an account to buy
               — guest checkout is always available.
             </p>
-            <GoogleSignInButton next="/account/orders" />
+            <GoogleSignInButton next={dest === "/account" ? "/account/orders" : dest} />
+
+            <div className="flex items-center gap-3 text-xs text-charcoal/40">
+              <span className="h-px flex-1 bg-charcoal/10" /> or{" "}
+              <span className="h-px flex-1 bg-charcoal/10" />
+            </div>
+            <EmailPasswordForm next={dest} />
+
             <p className="text-sm text-charcoal/50">
               Just want to track an order?{" "}
               <Link href="/track" className="font-medium text-green-deep underline">

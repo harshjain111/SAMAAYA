@@ -12,6 +12,9 @@ export const BRAND = {
 export const MOMENTS = ["morning", "afternoon", "evening"] as const;
 export type Moment = (typeof MOMENTS)[number];
 
+/** Variants at or below this stock level surface as low-stock in admin. */
+export const LOW_STOCK_THRESHOLD = 10;
+
 /** Order status pipeline (CLAUDE.md §ORDER STATUS PIPELINE). */
 export const ORDER_STATUSES = [
   "new",
