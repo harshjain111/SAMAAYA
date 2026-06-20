@@ -1,6 +1,20 @@
 /**
- * Domain types. The Supabase-generated database types land here in Prompt 0.2
- * (`types/database.ts`). This file re-exports the app-facing shapes.
+ * Domain types. Database types are generated-style in `types/database.ts`
+ * (regenerate with `supabase gen types` once the project is live).
  */
 
-export type { Moment, OrderStatus, PaymentStatus } from "@/lib/constants";
+export type {
+  Database,
+  Json,
+  Product,
+  ProductVariant,
+  ProductImage,
+  Customer,
+  Address,
+  Order,
+  OrderItem,
+  StoreSettings,
+  OrderStatus,
+  PaymentStatus,
+  Moment,
+} from "@/types/database";
