@@ -14,6 +14,8 @@ import { SocialProofBulkContact } from "@/components/home/SocialProofBulkContact
 // Re-fetch periodically so admin catalog/setting changes surface without redeploy.
 export const revalidate = 60;
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export default async function Home() {
   const [products, settings] = await Promise.all([
     getActiveProducts(),
@@ -24,8 +26,40 @@ export default async function Home() {
     ? Math.min(...products.map((p) => p.priceFrom))
     : undefined;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: settings.store_name || "SAMAAYA",
+        url: siteUrl,
+        slogan: "The Right Moment.",
+        description:
+          "Fresh-to-cup Assam tea. Packed fresh from Assam's finest estates, never warehoused.",
+        ...(settings.contact_email
+          ? {
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: settings.contact_email,
+                contactType: "customer service",
+              },
+            }
+          : {}),
+      },
+      {
+        "@type": "WebSite",
+        name: settings.store_name || "SAMAAYA",
+        url: siteUrl,
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <SiteHeader announcement={settings.announcement_bar} />
       <main>
         <Hero priceFrom={priceFrom} />
