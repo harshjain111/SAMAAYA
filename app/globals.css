@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+/*
+  SAMAAYA design tokens — single source of truth.
+  Mapped from SAMAAYA-CLAUDE.md §DESIGN TOKENS / PRD §6.1.
+  Tailwind v4 reads @theme to generate utilities (bg-amber, text-charcoal,
+  font-display, etc.) AND exposes each as a CSS variable (--color-amber).
+  CTA rule: primary buttons are AMBER. Never green-on-green.
+*/
+@theme {
+  /* Greens */
+  --color-green-deep: #1b4332; /* primary brand, headers, dark sections */
+  --color-green-mid: #2d5a3d; /* secondary surfaces */
+  --color-green-leaf: #52796f; /* accents, icons */
+  --color-green-soft: #74a57f; /* highlights, strength-meter fill */
+
+  /* Amber — PRIMARY CTA */
+  --color-amber: #c9881f; /* high contrast vs green */
+  --color-amber-light: #d4a24e; /* hover, secondary accent */
+
+  /* Neutrals */
+  --color-cream: #f7f3e9; /* page background, warm */
+  --color-charcoal: #2a2a24; /* body text */
+  --color-white: #ffffff;
+
+  /* Typography — wired to next/font CSS variables (see layout.tsx) */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Base */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--color-green-deep);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+/* Accessible focus ring — amber on a light halo, visible on any surface */
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
