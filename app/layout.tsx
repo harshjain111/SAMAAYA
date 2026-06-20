@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 // Display serif — premium, confident headings (CLAUDE.md §DESIGN TOKENS)
 const fraunces = Fraunces({
@@ -31,7 +32,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <CartDrawer />
+      </body>
     </html>
   );
 }

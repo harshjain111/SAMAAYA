@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { buttonClasses } from "@/components/ui";
+import { CartButton } from "@/components/cart/CartButton";
 
 export interface SiteHeaderProps {
   announcement?: string | null;
@@ -45,13 +46,8 @@ export function SiteHeader({ announcement }: SiteHeaderProps) {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
-            <Link
-              href="/cart"
-              className="text-sm font-medium text-charcoal/80 transition-colors hover:text-green-deep"
-            >
-              Cart
-            </Link>
+          <div className="flex items-center gap-4">
+            <CartButton />
             <Link href="/shop" className={buttonClasses("primary", "sm")}>
               Shop
             </Link>
