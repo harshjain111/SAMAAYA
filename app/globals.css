@@ -89,6 +89,35 @@ h4 {
     0 22px 40px -20px rgba(27, 67, 50, 0.28);
 }
 
+/* Hero reveal — gentle fade-up on load. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal-up {
+  animation: reveal-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.reveal-delay-1 {
+  animation-delay: 0.12s;
+}
+.reveal-delay-2 {
+  animation-delay: 0.24s;
+}
+.reveal-delay-3 {
+  animation-delay: 0.36s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    animation: none;
+  }
+}
+
 /* Faint paper grain on dark sections so flat fills read as crafted, not generated. */
 .grain {
   position: relative;

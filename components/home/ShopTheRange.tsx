@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ProductCard } from "@/components/ui";
+import { ProductCard, Icon } from "@/components/ui";
+import { SectionHeading } from "./SectionHeading";
 import type { ProductListItem } from "@/lib/data/products";
 
 export interface ShopTheRangeProps {
@@ -12,22 +13,20 @@ export interface ShopTheRangeProps {
  */
 export function ShopTheRange({ products }: ShopTheRangeProps) {
   return (
-    <section id="shop" className="scroll-mt-24 bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-20">
-        <div className="text-center">
-          <h2 className="text-3xl sm:text-4xl">Pick your moment.</h2>
-          <p className="mx-auto mt-3 max-w-xl text-charcoal/70">
-            Each one sourced from a specific estate, chosen for a specific mood.
-            All packed fresh, all shipped across India.
-          </p>
-        </div>
+    <section id="shop" className="scroll-mt-24 bg-cream">
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24">
+        <SectionHeading
+          eyebrow="Shop the range"
+          title="Pick your moment."
+          subtitle="Each one sourced from a specific estate, chosen for a specific mood. All packed fresh, all shipped across India."
+        />
 
         {products.length === 0 ? (
           <p className="mt-12 text-center text-charcoal/60">
             Our teas are being freshly stocked. Check back soon.
           </p>
         ) : (
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {products.map((p, i) => (
               <ProductCard
                 key={p.id}
@@ -44,12 +43,13 @@ export function ShopTheRange({ products }: ShopTheRangeProps) {
           </div>
         )}
 
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <Link
             href="/shop"
-            className="text-sm font-semibold text-amber hover:text-amber-light"
+            className="inline-flex items-center gap-1.5 rounded-full border border-green-deep/30 px-5 py-2.5 text-sm font-semibold text-green-deep transition-colors hover:border-green-deep hover:bg-green-deep hover:text-cream"
           >
-            View all teas →
+            View all teas
+            <Icon name="arrow-right" size={16} />
           </Link>
         </div>
       </div>

@@ -1,14 +1,16 @@
 import { MomentCard } from "@/components/ui";
+import { SectionHeading } from "./SectionHeading";
 
 /** Section 5 — Find Your Moment (copy deck §5). Three moment cards. */
 export function FindYourMoment() {
   return (
-    <section className="bg-cream">
-      <div className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="text-center text-3xl sm:text-4xl">
-          Samaaya means &ldquo;the right moment.&rdquo; Here&apos;s yours.
-        </h2>
-        <div className="mt-12 grid gap-6 sm:grid-cols-3">
+    <section className="bg-white">
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 sm:py-24">
+        <SectionHeading
+          eyebrow="Find your moment"
+          title={'Samaaya means "the right moment." Here\'s yours.'}
+        />
+        <div className="mt-12 grid gap-5 sm:grid-cols-3 sm:gap-6">
           <MomentCard
             moment="morning"
             icon="sun"
