@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { buttonClasses, Icon } from "@/components/ui";
+import { HeroVideo } from "./HeroVideo";
 
 export interface HeroProps {
   priceFrom?: number;
@@ -20,27 +21,17 @@ const TRUST = [
 export function Hero({ priceFrom }: HeroProps) {
   return (
     <section className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-green-deep md:min-h-[86vh]">
-      {/* Poster (instant + fallback) */}
+      {/* Poster (instant + fallback behind the video) */}
       <Image
         src="/hero/hero.png"
         alt="Freshly brewed Assam tea"
         fill
         priority
         sizes="100vw"
-        className="-z-20 object-cover"
+        className="-z-30 object-cover"
       />
-      {/* Cinematic video reveal (hidden for reduced-motion users) */}
-      <video
-        className="absolute inset-0 -z-20 h-full w-full object-cover motion-reduce:hidden"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster="/hero/hero.png"
-      >
-        <source src="/hero/hero.mp4" type="video/mp4" />
-      </video>
+      {/* Cinematic video reveal — autoplays on mobile + desktop */}
+      <HeroVideo />
 
       {/* Contrast scrim — dark on the left where the text sits, lighter on the right */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-green-deep via-green-deep/80 to-green-deep/25 md:to-transparent" />
