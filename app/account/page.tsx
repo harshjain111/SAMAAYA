@@ -50,16 +50,16 @@ export default async function AccountPage({
         ) : (
           <div className="mt-6 space-y-5">
             <p className="text-charcoal/70">
-              Sign in to see your order history. You never need an account to buy
-              — guest checkout is always available.
+              Sign in or create an account to see your order history. You never
+              need an account to buy — guest checkout is always available.
             </p>
             <GoogleSignInButton next={dest === "/account" ? "/account/orders" : dest} />
 
             <div className="flex items-center gap-3 text-xs text-charcoal/40">
-              <span className="h-px flex-1 bg-charcoal/10" /> or{" "}
+              <span className="h-px flex-1 bg-charcoal/10" /> or use email{" "}
               <span className="h-px flex-1 bg-charcoal/10" />
             </div>
-            <EmailPasswordForm next={dest} />
+            <EmailPasswordForm next={dest === "/account" ? "/account/orders" : dest} />
 
             <p className="text-sm text-charcoal/50">
               Just want to track an order?{" "}
